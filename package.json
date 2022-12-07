@@ -12,6 +12,7 @@
   "dependencies": {
     "bignumber.js": "^9.0.2",
     "dotenv": "^16.0.0",
+    "theblockchainapi": "^1.0.9407",
     "tronweb": "^4.1.0"
   }
 }
