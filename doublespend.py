@@ -139,8 +139,22 @@ if args.txid is not None:
 
     # required fee changed
     assert(fee_changed)
+
     r = rpc.signrawtransactionwithwallet(decTx)
+
     assert(r['complete'])
+    tx = CMutableTransaction.from_tx(r['tx'])
+
+    logging.debug('Payment tx %s' % b2x(tx.serialize()))
+    logging.info('Payment tx size: %.3f KB, fees: %s, %s BTC/KB' % \
+            (len(tx.serialize()) / 1000,
+            str_money_value(value_in-value_out),
+            str_money_value((value_in-value_out) / len(tx.serialize()) * 1000)))
+
+    if not args.dryrun:
+        txid = rpc.sendrawtransaction(tx)
+        logging.info('Sent payment tx: %s' % b2lx(txid))
+
     exit(0)
 
 # Add inputs until we meet the fee1 threshold
