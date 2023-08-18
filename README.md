@@ -1,5 +1,12 @@
 # tron.misc
-Miscellaneous scripts for tron blockchain
+Miscellaneous scripts for blockchain
+
+# Requirement
+### tron scripts
+nodejs
+
+### btc scripts
+python-bitcoinlib
 
 # Usage
 1. clone repo and install dependencies
@@ -39,6 +46,16 @@ This script aims transfering tron token to the `ACCOUNT`.
 This script aims transfering trc20 token to the `ACCOUNT`.
 
 > Remember to deploy trc20 token first and make sure you have enough energy and bandwidth.
+
+### doublespend
+```
+$ ./doublespend.py --txid xxxx xxxx 0.001 -n
+```
+
+### cpfp
+```
+$ ./cpfp.py --txid xxxx xxxx 0.001 -n
+```
 
 # License
 MIT
