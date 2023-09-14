@@ -128,11 +128,13 @@ if args.txid is not None:
 
         # TODO: find a better way
         if outAddress == args.address:
-            delta_fee = int(feeperbyte2 * len(decTx.serialize())) - delta_fee
-            value_out -= delta_fee
+            new_fee = int(feeperbyte2 * len(decTx.serialize()))
+            delta_fee = new_fee - delta_fee
+            if delta_fee > 0:
+                value_out -= delta_fee
             # vout.nValue = vout.nValue - delta_fee
             tx_n = idx
-            logging.debug('New fee: %s' % str_money_value(value_in - value_out))
+            logging.debug('New fee: %s' % str_money_value(new_fee))
         else:
             value_out -= vout.nValue
 
