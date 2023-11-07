@@ -60,6 +60,11 @@ func main() {
 		log.Fatal(err)
 	}
 
+	decUserAddressByte, err := txscript.PayToAddrScript(decUserAddress)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	parsedRpcUrl, err := url.Parse(*rpcUrl)
 	password, _ := parsedRpcUrl.User.Password()
 
@@ -128,7 +133,7 @@ func main() {
 	}
 	txOut := wire.NewTxOut(*amount, destinationAddrByte)
 	tx.AddTxOut(txOut)
-	txOut2 := wire.NewTxOut(*left, userAddress.ScriptAddress())
+	txOut2 := wire.NewTxOut(*left, decUserAddressByte)
 	tx.AddTxOut(txOut2)
 
 	log.Printf("sending %d satoshi from %s to %s...\n", *amount, decUserAddress.String(), targetAddress.String())
